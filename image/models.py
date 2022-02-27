@@ -4,7 +4,7 @@ from categories.models import Category
 from location.models import Location
 
 # Create your models here.
-class Image(models.model):
+class Image(models.Model):
   image = models.ImageField()
   image_name = models.CharField(max_length= 200)
   image_description = models.CharField(max_length=1000)

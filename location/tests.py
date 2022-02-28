@@ -3,7 +3,7 @@ from .models import Location
 # Create your tests here.
 class LocationTestClass(TestCase):
     def setUp(self):
-        self.location = Location(name='Kenya')
+        self.location = Location(location_name='Kenya', location_slug='ken', location_description='Country below Ethiopia')
         self.location.save_location()
 
     def test_instance(self):

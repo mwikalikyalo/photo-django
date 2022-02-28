@@ -12,7 +12,7 @@ class ImageTestClass(TestCase):
         self.category = Category(name='nature')
         self.category.save_category()
         
-        self.image= Image(image='earth', name='ugly', photographer='Mwikali', description='View from the sky', location=self.location, category=self.category)
+        self.image= Image(image='earth', image_name='ugly', image_description='View from the sky', category=self.category, location=self.location)
         self.image.save_image()
 
     # Testing instance
@@ -24,12 +24,6 @@ class ImageTestClass(TestCase):
         self.image.save_image()
         images=Image.objects.all()
         self.assertTrue(len(images)>0)
-
-      # Testing delete method
-    def test_delete(self):
-        self.image.delete_image()
-        images=Image.objects.all()
-        self.assertTrue(len(images)==0)
 
     def test_update_image(self):
         self.image.save_image()
@@ -51,6 +45,12 @@ class ImageTestClass(TestCase):
         self.image.save()
         images_found = self.image.filter_by_location(location='Kenya')
         self.assertFalse(len(images_found) > 0)  
+
+     # Testing delete method
+    def test_delete(self):
+        self.image.delete_image()
+        images=Image.objects.all()
+        self.assertTrue(len(images)==0)
 
     def tearDown(self):
         Image.objects.all().delete()

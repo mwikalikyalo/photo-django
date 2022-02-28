@@ -6,10 +6,10 @@ class ImageTestClass(TestCase):
 
     # set up method
     def setUp(self):
-        self.location = Location(name='Kenya')
+        self.location = Location(location_name='Kenya')
         self.location.save_location()
 
-        self.category = Category(name='nature')
+        self.category = Category(category_name='nature')
         self.category.save_category()
         
         self.image= Image(image='earth', image_name='ugly', image_description='View from the sky', category=self.category, location=self.location)

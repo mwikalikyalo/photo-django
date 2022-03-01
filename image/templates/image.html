@@ -1,4 +1,4 @@
-{% load cloudinary %}
+{% block content %}
 <div class="gallery-card shadow">
     <div class="gallery-image position-relative">
         <div data-url="{{ image.image.url }}" data-bs-toggle="tooltip" tabindex="0" data-bs-placement="top" title="Copy image url"
@@ -23,4 +23,4 @@
         </div>
     </div>
 </div>
-{% include 'display.html' %}
+{% endblock %}

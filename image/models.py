@@ -24,14 +24,14 @@ class Location(models.Model):
   location_slug = models.CharField(max_length=50)
   location_description = models.CharField(max_length=1000)
 
-  def __str__(self) -> str:
-      return self.location_name
-
   def save_location(self):
         self.save()
 
   def delete_location(self):
         self.delete()
+      
+  def __str__(self) -> str:
+    return self.location_name
 
 # Create your models here.
 class Image(models.Model):
@@ -68,7 +68,7 @@ class Image(models.Model):
         return images
 
   def __str__(self) -> str:
-      return self.image
+      return self.image_name
 
 # order images from latest
 class Meta:

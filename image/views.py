@@ -1,22 +1,27 @@
+from tkinter import image_names
 from django.shortcuts import render
 from .models import Location, Category, Image
 
 # Create your views here.
 def index(request):
     images = Image.objects.all()
-    category = Category.objects.all()
-    
-    return render(request, 'index.html', {'images':images, 'category':category})
+    categories = Category.objects.all()
+    locations = Location.objects.all()
+    return render(request, 'index.html', {'images':images, 'categories':categories, 'locations':locations})
 
 def category(request, category_slug):
-    category = Category.get_category_by_slug(category_slug)
+    category = Category.search_by_category(category_slug)
     images = Image.filter_by_category(category)
     return render(request, 'image.html', {'images':images, 'title': category})
 
 def location(request, location_slug):
-    location = Location.get_location_by_slug(location_slug)
+    location = Location.filter_by_location(location_slug)
     images = Image.filter_by_location(location)
-    return render(request, 'image.html', {'images':images, 'title': location})   
+    return render(request, 'image.html', {'images':images, 'title': location}) 
+
+def get_image_by_id(request, id):
+    image = Image.objects.get(pk=id)
+    return render(request, "display.html", {"image": image})
 
 def search_images(request):
 

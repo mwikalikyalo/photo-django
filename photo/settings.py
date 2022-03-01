@@ -80,6 +80,10 @@ WSGI_APPLICATION = 'photo.wsgi.application'
 
 
 # Database
+MODE=config("MODE", default="dev")
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+# development
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 # development
 if config('MODE')=="dev":
@@ -100,6 +104,7 @@ else:
             default=config('DATABASE_URL')
         )
     }
+
 
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)

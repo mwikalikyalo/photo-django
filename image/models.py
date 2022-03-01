@@ -1,7 +1,6 @@
 from unicodedata import category
 from django.db import models
-from categories.models import Category
-from location.models import Location
+from .models import Category,Location
 
 # Create your models here.
 class Image(models.Model):
@@ -39,7 +38,7 @@ class Image(models.Model):
 
   def __str__(self) -> str:
       return self.image
-      
+
 # order images from latest
 class Meta:
     ordering = ['-date_posted'] 

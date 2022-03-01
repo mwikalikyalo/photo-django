@@ -1,5 +1,6 @@
 from django.test import TestCase
-from .models import Location, Image, Category
+from .models import Image
+from categories.models import Category, Location
 
 # Create your tests here.
 class ImageTestClass(TestCase):
@@ -56,3 +57,6 @@ class ImageTestClass(TestCase):
         Image.objects.all().delete()
         Location.objects.all().delete()
         Category.objects.all().delete()
+
+    def __str__(self):
+        return self.image

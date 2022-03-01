@@ -1,4 +1,4 @@
-from tkinter import image_names
+
 from django.shortcuts import render
 from .models import Location, Category, Image
 

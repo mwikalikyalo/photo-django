@@ -33,7 +33,6 @@ class Location(models.Model):
   def delete_location(self):
         self.delete()
 
-
 # Create your models here.
 class Image(models.Model):
   image = models.ImageField()

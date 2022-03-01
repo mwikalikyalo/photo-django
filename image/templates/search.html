@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid pt-5 mt-5">
+    <div class="row pb-3 text-center">
+        {% if images %}
+            <h2 style="color: #ae2012"><strong>Found {{ images|length }} images in {{ message }} category</strong></h2>
+        {% else %}
+            <h2 style="color: #ae2012"> <strong>Found 0 images for your search {{ message }}</strong></h2>
+        {% endif %}      
+    </div>
+    <div class="row">
+        {% if images %}
+          {% for image in images %}
+      <div class="col-sm-4 col-md-4 col-lg-3 d-flex justify-content-center mb-5">
+        <a href="#" data-bs-target="#imagemodal{{ image.id }}" data-bs-toggle="modal" id="img">
+            <img id="imgsmall" src="{{image.image.url}}" style="width: 300px; height: 250px;">
+        </a>
+      </div>
+    </div>
+</div>
+{% endblock %}

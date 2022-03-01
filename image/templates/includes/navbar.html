@@ -19,13 +19,38 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#" style="color: white;">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" style="color:white;">Images</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" style="color:white;">Sign up</a>
-          </li>
-        </ul>
+          <li class="nav-item px-2 dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false" style="color: #bb3e03;">
+                Locations
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                {% for location in locations %}
+                <li>
+                    <a class="dropdown-item" href="{% url 'location'  location_slug=location.slug %}" style="color: #ee9b00;">{{location}}</a>
+                </li>
+                {% endfor %}
+                {% if locations.count == 0 %}
+                <p class="text-center">No locations added</p>
+                {% endif %}
+            </ul>
+        </li>
+        <li class="nav-item px-2 dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink1" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false" style="color: #bb3e03;">
+                Categories
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink1">
+                {% for category in categories %}
+                <li>
+                    <a class="dropdown-item" href="{% url 'category'  category_slug=category.slug %}">{{category}}</a>
+                </li>
+                {% endfor %}
+                {% if categories.count == 0 %}
+                <p class="text-center">No categories yet</p>
+                {% endif %}
+            </ul>
+        </li>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-warning" type="submit">Search</button>

@@ -8,6 +8,16 @@ def index(request):
     
     return render(request, 'index.html', {'images':images, 'category':category})
 
+def category(request, category_slug):
+    category = Category.get_category_by_slug(category_slug)
+    images = Image.filter_by_category(category)
+    return render(request, 'image.html', {'images':images, 'title': category})
+
+def location(request, location_slug):
+    location = Location.get_location_by_slug(location_slug)
+    images = Image.filter_by_location(location)
+    return render(request, 'image.html', {'images':images, 'title': location})   
+
 def search_images(request):
 
     if 'images' in request.GET and request.GET["images"]:

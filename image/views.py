@@ -2,11 +2,11 @@ from django.shortcuts import render
 from .models import Location, Category, Image
 
 # Create your views here.
-def home(request):
+def index(request):
     images = Image.objects.all()
     category = Category.objects.all()
     
-    return render(request, 'home.html', {'images':images, 'category':category})
+    return render(request, 'index.html', {'images':images, 'category':category})
 
 def search_images(request):
 
@@ -18,5 +18,5 @@ def search_images(request):
         return render(request, 'search.html',{"message":message,"images": searched_images})
 
     else:
-        message = "You haven't searched for any term"
+        message = "You haven't searched for any image"
         return render(request, 'search.html',{"message":message})

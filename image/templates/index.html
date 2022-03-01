@@ -9,10 +9,23 @@
 <body>
 <div class="bg-image"></div>
   <div class="bg-text">
-    <h2 style="font-size: 3em; color: #ca6702;">The Gala</h2>
+    <h2 style="font-size: 3em; color: #ca6702;">The Gallery</h2>
     <p style="font-size: 25px; color: white; font-weight: 600;">There is one thing the photograph must contain, the humanity of the moment.<br>
       - Robert Frank -</p>
   </div>
+  <section class="py-5 gallery-section container-fluid" id="gallery-section">
+    <h2 class="fw-bold text-center">The Gallery</h2>
+    <div class="row pt-4">
+        {% for image in images %}
+        <div class="col-sm-6 col-xl-3 col-lg-4">
+            {% include 'image.html' %}
+        </div>
+        {% endfor %}
+        {% if images.number == 0 %}
+        <p class="text-center pt-4">No images yet</p>
+        {% endif %}
+    </div>
+</section>
 </body>
 
 {% endblock %}

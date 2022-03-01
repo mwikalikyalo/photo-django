@@ -1,45 +1,26 @@
-{% load static %}
-<div class="modal fade" id="image-modal-{{image.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body px-3">
-                <div class="image-details">
-                    <img src="{{ image.image.url }}" alt="" class="img-fluid w-100">
-                    <div class="details pt-3 pb-4">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h2 class="fw-bold fs-3">
-                                    {{ image.image_name }}
-                                </h2>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="d-flex">
-                                    <a href="#" class="btn btn-outline-warning px-3 py-1 text-sm me-3">
-                                        {{ image.location }}
-                                    </a>
-                                    <a href="#" class="btn btn-outline-warning px-3 py-1 text-sm me-3">
-                                        {{ image.category }}
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="text-muted pt-3 pb-0">
-                            {{ image.image_description }}
-                        </p>
-                        <div data-url="{{ image.image.url }}"
-                            class="share bg-secondary rounded-circle d-flex justify-content-center align-items-center">
-                            <span class="material-icons">share</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer border-0">
-                <button type="button" class="btn btn-default border border-dark px-4"
-                    data-bs-dismiss="modal">Close</button>
-            </div>
+{% load cloudinary %}
+<div class="gallery-card shadow">
+    <div class="gallery-image position-relative">
+        <div data-url="{{ image.image.url }}" data-bs-toggle="tooltip" tabindex="0" data-bs-placement="top" title="Copy image url"
+            class="share bg-secondary rounded-circle position-absolute d-flex justify-content-center align-items-center">
+            <span class="material-icons">share</span>
+        </div>
+        <img src="{{ image.image_url }}" alt=""
+            class="img-fluid" data-bs-toggle="modal" data-bs-target="#image-modal-{{image.id}}">
+    </div>
+    <div class="details p-3 pb-4">
+        <a href="#" class="fw-bold fs-3 h2 text-dark" data-bs-toggle="modal" data-bs-target="#image-modal-{{image.id}}">
+            {{ image.image_name }}
+        </a>
+
+        <div class="d-flex">
+            <a href="#" class="btn btn-outline-warning px-3 py-1 text-sm me-3 btn-xs">
+                {{ image.location }}
+            </a>
+            <a href="#" class="btn btn-outline-warning px-3 text-sm me-3">
+                {{image.category}}
+            </a>
         </div>
     </div>
 </div>
+{% include 'display.html' %}

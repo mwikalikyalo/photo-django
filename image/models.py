@@ -1,5 +1,6 @@
 from unicodedata import category
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Category(models.Model):
@@ -35,10 +36,10 @@ class Location(models.Model):
 
 # Create your models here.
 class Image(models.Model):
-  image = models.ImageField()
+  # image = models.ImageField()
   image_name = models.CharField(max_length= 200)
   image_description = models.CharField(max_length=1000)
-
+  image = CloudinaryField('image')
   category = models.ForeignKey(Category,on_delete=models.CASCADE)
   location = models.ForeignKey(Location, on_delete=models.CASCADE)
   

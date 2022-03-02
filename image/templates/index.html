@@ -20,7 +20,7 @@
             <div class="col-sm-6 col-xl-3 col-lg-4">
                 <img src="{{image.image.url}}" style="width: 250px; height: 300px; border-radius: 5px;">
                 <p style="text-align: center; font-weight: 600;">{{image.image_name}}</p>
-                <a href= "/get-image/{{ image.id }}" class="btn btn-warning">Display</a>
+                <a href= "/get-image/{{ image.id }}" target="self" class="btn btn-warning">Display</a>
             </div>
             {% endfor %}
             {% if images.number == 0 %}

@@ -9,11 +9,14 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-import django_on_heroku
+import django_heroku
 from pathlib import Path
 import os
 from decouple import config, Csv
 import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,6 +33,13 @@ DEBUG = config('DEBUG', default=True)
 
 ALLOWED_HOSTS = []
 
+# adding config
+cloudinary.config( 
+  cloud_name = "dlntyyesm", 
+  api_key = "627375511792298", 
+  api_secret = "KB5_YDQpmi4LSbmZ7fDuwz4NsR0", 
+  secure= True
+)
 
 # Application definition
 
@@ -40,7 +50,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'image'
+    'image',
+    'bootstrap5',
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -78,33 +90,31 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'photo.wsgi.application'
 
-
 # Database
 MODE=config("MODE", default="dev")
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
-# development
+DEBUG=os.environ.get('DEBUG',False)
+
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 # development
 if config('MODE')=="dev":
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('DB_NAME'),
-            'USER': config('DB_USER'),
-            'PASSWORD': config('DB_PASSWORD'),
-            'HOST': config('DB_HOST'),
-            'PORT': '',
-    },
-}
-# production
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': config('DB_NAME'),
+                'USER': config('DB_USER'),
+                'PASSWORD': config('DB_PASSWORD'),
+                'HOST': config('DB_HOST'),
+                'PORT': '',
+        }
+    }
+    
+ # production
 else:
     DATABASES = {
         'default': dj_database_url.config(
             default=config('DATABASE_URL')
         )
     }
-
 
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
@@ -147,7 +157,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, '/static/'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
@@ -156,4 +166,4 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Configure Django App for Heroku.
-django_on_heroku.settings(locals())
+django_heroku.settings(locals())
